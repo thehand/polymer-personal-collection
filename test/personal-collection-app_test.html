@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Message Area test</title>
+    
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../src/personal-collection/personal-collection-app.html">
+  </head>
+  <body>
+
+    <test-fixture id="default-fixture">
+      <template>
+        <personal-collection></personal-collection>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="minValueFixture">
+      <template>
+        <trivial-counter min-value="3"></trivial-counter>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="maxValueFixture">
+      <template>
+        <trivial-counter max-value="10"></trivial-counter>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="minAndMaxValueFixture">
+      <template>
+        <trivial-counter min-value="3" max-value="10"></trivial-counter>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('<personal-collection>', function() {
+
+        test('instantiating the collection', function() {
+          var element = fixture('default-fixture');
+          console.log(element.shadowRoot);
+          /*
+          assert.equal(element.minValue, 0);
+          var elementShadowRoot = element.shadowRoot;
+          var currentCounterValue = elementShadowRoot.querySelector('b');
+          assert.equal(currentCounterValue.innerHTML, '0');
+          */
+        });
+
+        /*
+        test('setting a minimum value on the counter works', function() {
+          var element = fixture('minValueFixture');
+          assert.equal(element.prop1, 'new-prop1');
+          var elementShadowRoot = element.shadowRoot;
+          var elementHeader = elementShadowRoot.querySelector('h2');
+          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
+        });
+        */
+
+      });
+    </script>
+  </body>
+</html>

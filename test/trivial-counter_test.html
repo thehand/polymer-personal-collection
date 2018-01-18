@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>Trivial Counter test</title>
+  
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../src/trivial-counter/trivial-counter.html">
+</head>
+
+<body>
+
+  <test-fixture id="default-fixture">
+    <template>
+      <trivial-counter></trivial-counter>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="minValueFixture">
+    <template>
+      <trivial-counter min-value="3"></trivial-counter>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="maxValueFixture">
+    <template>
+      <trivial-counter max-value="10"></trivial-counter>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="minAndMaxValueFixture">
+    <template>
+      <trivial-counter min-value="3" max-value="10"></trivial-counter>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('<trivial-counter>', function () {
+
+      test('instantiating the default counter, starting from 0 without limits', function () {
+        var element = fixture('default-fixture');
+        console.log(element.shadowRoot);
+      });
+
+      /*
+      describe('<trivial-counter>', function() {
+        beforeEach(function() {
+          var clock;
+        });
+
+        it('should display a default counter, starting from 0, without limits', function() {
+          clock = fixture('minValueFixture');
+          console.log(clock.shadowRoot);
+          clock.setAttribute('show-buttons', 'true');
+          expect(clock.showButtons).to.be.equal(true);
+          expect(clock.querySelector('.buttons').attributes)
+          .to.have.ownProperty('visible');
+        });
+
+        context('common tests', function() {
+        });
+      });
+      */
+    });
+  </script>
+</body>
+
+</html>

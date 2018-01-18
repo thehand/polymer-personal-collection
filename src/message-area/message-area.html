@@ -1,0 +1,121 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+
+<dom-module id="message-area">
+    <template>
+        <style>
+            :host {
+                display: inline-block;
+            }
+
+            :host p {
+                align-items: flex-start;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            :host p .alertMessage {
+                color: red;
+                font-style: oblique;
+            }
+        </style>
+
+        <label for="[[areaName]]">[[areaLabel]]</label>
+        <br />
+
+        <textarea cols="[[areaCols]]" rows="[[areaRows]]" name="[[areaName]]" id="[[areaId]]" placeholder="[[areaPlaceholder]]" maxlength="[[areaMaxLength]]" value="{{areaValue::change}}" on-keyup="countChars">{{areaValue}}</textarea>
+
+        <p>
+            <span class="alertMessage">{{alertMessage}}</span>
+            <span>Remaining characters:&nbsp;<b>[[remainingChars]]</b></span>
+        </p>
+    </template>
+
+    <script>
+        /**
+        * @customElement
+        * @polymer
+        */
+        class MessageArea extends Polymer.Element {
+            static get is() {
+                return 'message-area';
+            }
+
+            static get properties() {
+                return {
+                    areaName: {
+                        type: String,
+                        value: 'message-area-name',
+                        reflectToAttribute: true
+                    },
+                    areaId: {
+                        type: String,
+                        value: 'message-area-id',
+                        reflectToAttribute: true
+                    },
+                    areaPlaceholder: {
+                        type: String,
+                        value: 'Leave your message here',
+                        reflectToAttribute: true
+                    },
+                    areaValue: {
+                        type: String,
+                        value: '',
+                        reflectToAttribute: true,
+                        notify: true,
+                        observer: 'countChars'
+                    },
+                    areaCols: {
+                        type: Number,
+                        value: 80,
+                        reflectToAttribute: true
+                    },
+                    areaRows: {
+                        type: Number,
+                        value: 5,
+                        reflectToAttribute: true
+                    },
+                    areaLabel: {
+                        type: String,
+                        value: 'Message',
+                        reflectToAttribute: true
+                    },
+                    areaMaxLength: {
+                        type: Number,
+                        value: 140,
+                        reflectToAttribute: true
+                    },
+                    remainingChars: {
+                        type: Number,
+                        value: this.areaMaxLength,
+                        notify: true,
+                        observer: 'checkRemaining'
+                    },
+                    alertMessage: String
+                }
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+                this.countChars();
+            }
+
+            countChars() {
+                let currValLength = 0;
+                this.areaValue = this.shadowRoot.querySelector('textarea').value;
+                if (null !== this.areaValue) {
+                    currValLength = parseInt(this.areaValue.length);
+                }
+                this.remainingChars = parseInt(this.areaMaxLength) - currValLength;
+            }
+
+            checkRemaining() {
+                this.alertMessage = null;
+                if (this.remainingChars < 0) {
+                    this.alertMessage = 'Max allowed characters reached (' + this.areaMaxLength + '), please reduce your text.'
+                }
+            }
+        }
+
+        window.customElements.define(MessageArea.is, MessageArea);
+    </script>
+    </dom-element>

@@ -1,0 +1,91 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<dom-module id="trivial-counter">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <p>The current value is&nbsp;
+      <b id="current-counter">{{trivialCounter}}</b>
+    </p>
+
+    <button on-click="increaseCounter">
+      <iron-icon icon="icons:add"></iron-icon>&nbsp;Increase counter
+    </button>
+
+    <button on-click="decreaseCounter">
+      <iron-icon icon="icons:remove"></iron-icon>&nbsp;Decrease counter
+    </button>
+
+    <p style="color: red; font-style: oblique;">{{alertMessage}}</p>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class TrivialCounter extends Polymer.Element {
+      static get is() {
+        return 'trivial-counter';
+      }
+
+      static get properties() {
+        return {
+          minValue: {
+            type: Number,
+            value: 0,
+            notify: true,
+            reflectToAttribute: true
+          },
+          maxValue: {
+            type: Number,
+            value: null,
+            notify: true,
+            reflectToAttribute: true
+          },
+          trivialCounter: {
+            type: Number,
+            value: 0
+          },
+          alertMessage: String
+        };
+      }
+
+      increaseCounter() {
+        this.alertMessage = null;
+        if (this.maxValue === null || this.trivialCounter < this.maxValue) {
+          this.trivialCounter++;
+        } else {
+          this.alertMessage = 'You\'ve already reached the highest allowed value (' + this.maxValue + ').';
+        }
+      }
+
+      decreaseCounter() {
+        this.alertMessage = null;
+        if (this.trivialCounter > this.minValue) {
+          this.trivialCounter--;
+        } else {
+          this.alertMessage = 'You\'ve already reached the lowest allowed value (' + this.minValue + ').';
+        }
+      }
+
+      setStartingValue() {
+        return this.minValue;
+      }
+
+      connectedCallback() {
+        if (this.minValue !== 0) {
+          this.trivialCounter = this.minValue;
+        }
+      }
+    }
+
+    window.customElements.define(TrivialCounter.is, TrivialCounter);
+  </script>
+</dom-module>

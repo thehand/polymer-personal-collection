@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Message Area test</title>
+    
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../src/message-area/message-area.html">
+  </head>
+  <body>
+
+    <test-fixture id="default-fixture">
+      <template>
+        <message-area></message-area>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="minValueFixture">
+      <template>
+        <trivial-counter min-value="3"></trivial-counter>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="maxValueFixture">
+      <template>
+        <trivial-counter max-value="10"></trivial-counter>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="minAndMaxValueFixture">
+      <template>
+        <trivial-counter min-value="3" max-value="10"></trivial-counter>
+      </template>
+    </test-fixture>
+
+    <script>
+      describe('<message-area>', function() {
+        beforeEach(function() {
+          var clock;
+        });
+
+        it('should display a default counter, starting from 0, without limits', function() {
+          clock = fixture('default-fixture');
+          console.log(clock);
+          /*clock.setAttribute('show-buttons', 'true');
+          expect(clock.showButtons).to.be.equal(true);
+          expect(clock.querySelector('.buttons').attributes)
+          .to.have.ownProperty('visible');*/
+        });
+
+        context('common tests', function() {
+        
+        });
+      });
+    </script>
+  </body>
+</html>

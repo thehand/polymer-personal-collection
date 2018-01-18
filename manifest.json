@@ -1,0 +1,7 @@
+{
+  "name": "personal-collection",
+  "short_name": "personal-collection",
+  "description": "Personal Collection",
+  "start_url": "/",
+  "display": "standalone"
+}

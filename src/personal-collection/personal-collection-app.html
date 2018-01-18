@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../trivial-counter/trivial-counter.html">
+<link rel="import" href="../message-area/message-area.html">
+
+<dom-module id="personal-collection">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      :host h3 {
+        border-top: 1px dashed rgba(0, 0, 0, .4);
+        padding-top: 1em;
+      }
+
+      :host .component {
+        background-color: aliceblue;
+        box-sizing: border-box;
+        padding: .3em .5em;
+      }
+    </style>
+
+    <h1>Hello man!</h1>
+    <p>This is my personal polymer collection</p>
+    
+    <h3>Trivial Counter</h1>
+    <p>Just click on the right button to increase/decrease your personal counter.</p>
+    <div class="component">
+        <trivial-counter min-value="-5" max-value="9"></trivial-counter>
+    </div>
+
+    <h3>Message Area</h1>
+    <p>A textarea with maxlength and remaining characters counter</p>
+    <div class="component">
+        <message-area area-max-length="50"></message-area>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PersonalCollection extends Polymer.Element {
+      static get is() {
+        return 'personal-collection';
+      }
+    }
+
+    window.customElements.define(PersonalCollection.is, PersonalCollection);
+  </script>
+</dom-module>
